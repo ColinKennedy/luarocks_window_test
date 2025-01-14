@@ -70,5 +70,7 @@ jobs:
         Get-ChildItem -Path "$env:APPDATA\luarocks"
         echo "LUAROCKS lib CHECK"
         Get-ChildItem -Path "$env:APPDATA\luarocks\lib"
-        $env:LUA_PATH += ";$env:APPDATA\luarocks\lib\?\init.lua;;"
+        Get-ChildItem -Path "$env:APPDATA\luarocks\lib\lua"
+        Get-ChildItem -Path "$env:APPDATA\luarocks\lib\lua\5.1"
+        $env:LUA_PATH += ";$env:APPDATA\luarocks\lib\lua\5.1\?\init.lua;;"
         lua -e "require 'lfs'"
