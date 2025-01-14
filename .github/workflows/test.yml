@@ -66,5 +66,7 @@ jobs:
     - name: Prepare
       run: |
         luarocks install luafilesystem
+        echo "LUAROCKS CHECK"
+        Get-ChildItem -Path "$env:APPDATA\luarocks"
+        $env:LUA_PATH += ";$env:APPDATA\luarocks\lib\?\init.lua;;"
         lua -e "require 'lfs'"
-        luarocks --verbose test luasystem-scm-0.rockspec --prepare
