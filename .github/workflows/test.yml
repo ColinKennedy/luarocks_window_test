@@ -68,5 +68,7 @@ jobs:
         luarocks install luafilesystem
         echo "LUAROCKS CHECK"
         Get-ChildItem -Path "$env:APPDATA\luarocks"
+        echo "LUAROCKS lib CHECK"
+        Get-ChildItem -Path "$env:APPDATA\luarocks\lib"
         $env:LUA_PATH += ";$env:APPDATA\luarocks\lib\?\init.lua;;"
         lua -e "require 'lfs'"
