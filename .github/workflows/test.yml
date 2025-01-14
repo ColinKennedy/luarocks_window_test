@@ -52,10 +52,6 @@ jobs:
       with:
         luarocksVersion: "3.11.0"
 
-    - name: Explicit luasystem install
-      run: |
-        luarocks --verbose install luasystem --local
-
     - uses: actions/checkout@v4
       with:
         repository: "lunarmodules/luasystem"
