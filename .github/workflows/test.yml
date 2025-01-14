@@ -57,24 +57,6 @@ jobs:
       with:
         luarocksVersion: "3.11.0"
 
-    # - name: Prepare
-    #   run: |
-    #     lua --version
-    #     lua -e "require 'lfs'"
-    #     luarocks --verbose test luasystem-scm-0.rockspec --prepare
-
     - name: Prepare
-      working-directory: ${{ github.workspace }}
       run: |
-        luarocks config variables.LUA_DIR ${{ github.workspace }}/.lua
-        luarocks config variables.LUA_INCDIR ${{ github.workspace }}/.lua/include
-        luarocks config variables.LUA_LIBDIR ${{ github.workspace }}/.lua/lib
-        luarocks install luafilesystem
-        echo "LUAROCKS CHECK"
-        Get-ChildItem -Path "$env:APPDATA\luarocks"
-        echo "LUAROCKS lib CHECK"
-        Get-ChildItem -Path "$env:APPDATA\luarocks\lib"
-        Get-ChildItem -Path "$env:APPDATA\luarocks\lib\lua"
-        Get-ChildItem -Path "$env:APPDATA\luarocks\lib\lua\5.1"
-        $env:LUA_PATH += ";$env:APPDATA\luarocks\lib\lua\5.1\?\init.lua;;"
-        lua -e "require 'lfs'"
+        luarocks --verbose test luasystem-scm-0.rockspec --prepare
