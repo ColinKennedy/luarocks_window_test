@@ -57,6 +57,13 @@ jobs:
       with:
         luarocksVersion: "3.11.0"
 
-    - name: Prepare
+    # - name: Prepare
+    #   run: |
+    #     lua --version
+    #     lua -e "require 'lfs'"
+    #     luarocks --verbose test luasystem-scm-0.rockspec --prepare
+
+    - name: Install LuaFileSystem
       run: |
-        luarocks --verbose test luasystem-scm-0.rockspec --prepare
+        luarocks install luafilesystem
+        lua -e "require 'lfs'"
