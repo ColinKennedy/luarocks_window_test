@@ -63,5 +63,5 @@ jobs:
         echo "THE PATH VAR"
         echo $env:PATH
         echo ".luarocks folder"
-        Get-ChildItem D:\a\luarocks_window_test\luarocks_window_test\.luarocks\bin
+        Get-ChildItem D:\a\luarocks_window_test\luarocks_window_test\.luarocks
         luarocks --verbose test luasystem-scm-0.rockspec --prepare
