@@ -32,7 +32,7 @@ jobs:
 
     - uses: luarocks/gh-actions-lua@master
       with:
-        luaVersion: ${{ matrix.lua-version }}
+        luaVersion: ${{ matrix.luaVersion }}
 
     - uses: luarocks/gh-actions-luarocks@master
 
