@@ -66,4 +66,9 @@ jobs:
     - name: Install LuaFileSystem
       run: |
         luarocks install luafilesystem
+        Get-ChildItem -Path "C:\Users\runneradmin\AppData\Roaming\luarocks"
+        Get-ChildItem -Path "$env:APPDATA\luarocks"
+        Get-ChildItem -Path "$env:APPDATA\luarocks\lua"
+        Get-ChildItem -Path "$env:APPDATA\luarocks\lua\5.1"
+        Get-ChildItem -Path "$env:APPDATA\luarocks\lua\5.1\lib"
         lua -e "require 'lfs'"
