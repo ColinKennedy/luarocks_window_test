@@ -59,11 +59,9 @@ jobs:
 
     - name: Prepare
       run: |
-        $env:PATH += ";$env:APPDATA\luarocks\bin"
+        $env:PATH += ";$env:D:\a\luarocks_window_test\luarocks_window_test\.luarocks\bin"
         echo "THE PATH VAR"
         echo $env:PATH
         echo ".luarocks folder"
         Get-ChildItem D:\a\luarocks_window_test\luarocks_window_test\.luarocks\bin
-        echo "appdata inner folder"
-        Get-ChildItem -Path "$env:APPDATA\luarocks\bin"
         luarocks --verbose test luasystem-scm-0.rockspec --prepare
