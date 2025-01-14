@@ -1,75 +1,43 @@
-name: Test
+name: ci
 
 on:
   pull_request:
-    types: [opened, synchronize, reopened, ready_for_review]
-    branches:
-    - main
   push:
     branches:
-      - main
-      - first_pass
+    - master
+    - different_repo_test
 
 jobs:
-  test:
+  TestMatrix:
     strategy:
       matrix:
         neovim: [v0.10.0]
         os: ["windows-latest"]
-        # TODO: Add these variants later
         luaVersion:
         - "5.1"
-        # - "luajit"
         include:
           - os: "windows-latest"
             toolchain: "msvc"
             luaVersion: "5.1"
-          # - os: "windows-latest"
-          #   toolchain: "mingw"  # unused, other than for display in the UI
-          #   luaVersion: "luajit"
-
     runs-on: ${{ matrix.os }}
-    name: "OS: ${{ matrix.os }} - Neovim: ${{ matrix.neovim }}"
 
     steps:
-
-    - uses: actions/checkout@v4
-      with:
-        repository: "lunarmodules/luasystem"
+    - uses: actions/checkout@master
 
     - name: Setup MSVC
-      # the 'hishamhm/gh-actions-lua' step requires msvc to build PuC Rio Lua
-      # versions on Windows (LuaJIT will be build using MinGW/gcc).
+      # 'luarocks/gh-actions-lua' step requires msvc to build PUC-Rio Lua
+      # versions on Windows (LuaJIT will be built using MinGW/gcc).
       if: ${{ matrix.toolchain == 'msvc' }}
       uses: ilammy/msvc-dev-cmd@v1
 
-    - uses: leafo/gh-actions-lua@master
+    - uses: luarocks/gh-actions-lua@master
       with:
-        # Neovim is compiled with LuaJIT so we might as well match. But it
-        # doesn't look like we can match it exactly.
-        #
-        # Reference:
-        #    https://github.com/leafo/gh-actions-lua/issues/49#issuecomment-2295071198
-        #
-        luaVersion: "5.1"
+        luaVersion: ${{ matrix.lua-version }}
 
-    - uses: hishamhm/gh-actions-luarocks@v5
-      with:
-        luarocksVersion: "3.11.0"
+    - uses: luarocks/gh-actions-luarocks@master
 
-    # - name: Prepare
-    #   run: |
-    #     lua --version
-    #     lua -e "require 'lfs'"
-    #     luarocks --verbose test luasystem-scm-0.rockspec --prepare
-
-    - name: Install LuaFileSystem
+    - name: Windows Build
+      if: ${{ matrix.os == 'windows-latest' }}
       run: |
         luarocks install luafilesystem
-        Get-ChildItem -Path "C:\Users\runneradmin\AppData\Roaming\luarocks"
-        Get-ChildItem -Path "$env:APPDATA\luarocks"
-        Get-ChildItem -Path "$env:APPDATA\luarocks\lib"
-        Get-ChildItem -Path "$env:APPDATA\luarocks\lib\lua"
-        Get-ChildItem -Path "$env:APPDATA\luarocks\lib\lua\5.1"
-        Get-ChildItem -Path "$env:APPDATA\luarocks\lib\lua\5.1\lib"
         lua -e "require 'lfs'"
