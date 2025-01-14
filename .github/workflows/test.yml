@@ -59,4 +59,5 @@ jobs:
     - name: Prepare
       run: |
         $env:PATH += ";$env:APPDATA\luarocks\bin"
+        echo $env:PATH
         luarocks --verbose test luasystem-scm-0.rockspec --prepare
