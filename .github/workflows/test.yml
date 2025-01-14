@@ -32,6 +32,11 @@ jobs:
     name: "OS: ${{ matrix.os }} - Neovim: ${{ matrix.neovim }}"
 
     steps:
+
+    - uses: actions/checkout@v4
+      with:
+        repository: "lunarmodules/luasystem"
+
     - name: Setup MSVC
       # the 'hishamhm/gh-actions-lua' step requires msvc to build PuC Rio Lua
       # versions on Windows (LuaJIT will be build using MinGW/gcc).
@@ -52,17 +57,13 @@ jobs:
       with:
         luarocksVersion: "3.11.0"
 
-    - uses: actions/checkout@v4
-      with:
-        repository: "lunarmodules/luasystem"
-
     - name: Prepare
       run: |
         $env:PATH += ";$env:APPDATA\luarocks\bin"
         echo "THE PATH VAR"
         echo $env:PATH
-        echo "appdata inner folder"
-        Get-ChildItem -Path "$env:APPDATA\luarocks\bin"
         echo ".luarocks folder"
         Get-ChildItem D:\a\luarocks_window_test\luarocks_window_test\.luarocks\bin
+        echo "appdata inner folder"
+        Get-ChildItem -Path "$env:APPDATA\luarocks\bin"
         luarocks --verbose test luasystem-scm-0.rockspec --prepare
