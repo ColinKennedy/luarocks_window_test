@@ -18,15 +18,15 @@ jobs:
         os: ["windows-latest"]
         # TODO: Add these variants later
         luaVersion:
-        # - "5.1"
-        - "luajit"
+        - "5.1"
+        # - "luajit"
         include:
-          # - os: "windows-latest"
-          #   toolchain: "msvc"
-          #   luaVersion: "5.1"
           - os: "windows-latest"
-            toolchain: "mingw"  # unused, other than for display in the UI
-            luaVersion: "luajit"
+            toolchain: "msvc"
+            luaVersion: "5.1"
+          # - os: "windows-latest"
+          #   toolchain: "mingw"  # unused, other than for display in the UI
+          #   luaVersion: "luajit"
 
     runs-on: ${{ matrix.os }}
     name: "OS: ${{ matrix.os }} - Neovim: ${{ matrix.neovim }}"
