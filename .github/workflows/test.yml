@@ -5,7 +5,7 @@ on:
   push:
     branches:
     - master
-    - different_repo_test
+    - fixing_001_added_back_luasystem_001
 
 jobs:
   TestMatrix:
@@ -22,7 +22,10 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
-    - uses: actions/checkout@master
+
+    - uses: actions/checkout@v4
+      with:
+        repository: "lunarmodules/luasystem"
 
     - name: Setup MSVC
       # 'luarocks/gh-actions-lua' step requires msvc to build PUC-Rio Lua
@@ -39,5 +42,4 @@ jobs:
     - name: Windows Build
       if: ${{ matrix.os == 'windows-latest' }}
       run: |
-        luarocks install luafilesystem
-        lua -e "require 'lfs'"
+        luarocks --verbose test luasystem-scm-0.rockspec --prepare
