@@ -45,9 +45,12 @@ jobs:
       with:
         luarocksVersion: "3.11.0"
 
-    - name: Install LuaFileSystem
+    - name: Install mega.logging
       run: |
         luarocks install mega.logging
-        luarocks install luafilesystem
         lua -e "require 'mega.logging'"
+
+    - name: Install LuaFileSystem
+      run: |
+        luarocks install luafilesystem
         lua -e "require 'lfs'"
