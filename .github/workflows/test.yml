@@ -41,7 +41,7 @@ jobs:
       with:
         luaVersion: "5.1"
 
-    - uses: hishamhm/gh-actions-luarocks@v5
+    - uses: hishamhm/gh-actions-luarocks@master
       with:
         luarocksVersion: "3.11.0"
 
