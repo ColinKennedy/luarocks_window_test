@@ -37,7 +37,7 @@ jobs:
       if: ${{ matrix.toolchain == 'msvc' }}
       uses: ilammy/msvc-dev-cmd@v1
 
-    - uses: leafo/gh-actions-lua@master
+    - uses: hishamhm/gh-actions-lua@master
       with:
         luaVersion: "5.1"
 
