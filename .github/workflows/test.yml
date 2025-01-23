@@ -8,7 +8,7 @@ on:
   push:
     branches:
       - main
-      - testing_other_packages_002
+      - luarocks_prepare_test
 
 jobs:
   test:
