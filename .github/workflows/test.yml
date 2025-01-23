@@ -14,36 +14,31 @@ jobs:
   test:
     strategy:
       matrix:
-        os: ["windows-latest"]
-        luaVersion:
-        - "5.1"
         include:
-          - os: "windows-latest"
-            toolchain: "msvc"
-            luaVersion: "5.1"
+        - os: "windows-latest"
+          toolchain: "msvc"
+          luaVersion: "5.1"
+          neovim: "v0.10.0"
+        - os: "windows-latest"
+          toolchain: "mingw"  # unused, other than for display in the UI
+          luaVersion: "luajit"
+          neovim: "v0.10.0"
 
     runs-on: ${{ matrix.os }}
-    name: "OS: ${{ matrix.os }} - Neovim: ${{ matrix.neovim }}"
+    name: "${{ matrix.os }} ${{ matrix.toolchain }}, Lua ${{ matrix.luaVersion }}, Neovim: ${{ matrix.neovim }}"
 
     steps:
-
-    - uses: actions/checkout@v4
-      with:
-        repository: "lunarmodules/luasystem"
-
     - name: Setup MSVC
-      # the 'hishamhm/gh-actions-lua' step requires msvc to build PuC Rio Lua
+      # the 'luarocks/gh-actions-lua' step requires msvc to build PUC-Rio Lua
       # versions on Windows (LuaJIT will be build using MinGW/gcc).
       if: ${{ matrix.toolchain == 'msvc' }}
       uses: ilammy/msvc-dev-cmd@v1
 
-    - uses: hishamhm/gh-actions-lua@master
+    - uses: luarocks/gh-actions-lua@master
       with:
-        luaVersion: "5.1"
+        luaVersion: "${{ matrix.luaVersion }}"
 
-    - uses: hishamhm/gh-actions-luarocks@master
-      with:
-        luarocksVersion: "3.11.0"
+    - uses: luarocks/gh-actions-luarocks@v5
 
     - name: Install mega.logging
       run: |
