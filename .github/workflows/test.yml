@@ -42,4 +42,5 @@ jobs:
 
     - name: Build Test Dependencies
       run: |
+        dir
         luarocks test nvim-best-practices-plugin-template-scm-1.rockspec --prepare
