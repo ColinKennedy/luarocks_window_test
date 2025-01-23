@@ -8,7 +8,7 @@ on:
   push:
     branches:
       - main
-      - testing_other_packages
+      - testing_other_packages_002
 
 jobs:
   test:
