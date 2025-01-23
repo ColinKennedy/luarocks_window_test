@@ -28,6 +28,9 @@ jobs:
     name: "${{ matrix.os }} ${{ matrix.toolchain }}, Lua ${{ matrix.luaVersion }}, Neovim: ${{ matrix.neovim }}"
 
     steps:
+    - name: Checkout
+      uses: actions/checkout@master
+
     - name: Setup MSVC
       # the 'luarocks/gh-actions-lua' step requires msvc to build PUC-Rio Lua
       # versions on Windows (LuaJIT will be build using MinGW/gcc).
@@ -42,6 +45,4 @@ jobs:
 
     - name: Build Test Dependencies
       run: |
-        cd ..
-        dir
         luarocks test nvim-best-practices-plugin-template-scm-1.rockspec --prepare
