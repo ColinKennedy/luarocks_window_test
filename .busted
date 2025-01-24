@@ -1,5 +1,5 @@
 return {
   _all = {
-    lua = "nlua",
+    lua = "nvim -u NONE -U NONE -N -i NONE -l",
   },
 }
