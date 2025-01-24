@@ -31,6 +31,12 @@ jobs:
     - name: Checkout
       uses: actions/checkout@master
 
+    - name: Install Neovim
+      uses: rhysd/action-setup-vim@v1
+      with:
+        neovim: true
+        version: ${{ matrix.neovim }}
+
     - name: Setup MSVC
       # the 'luarocks/gh-actions-lua' step requires msvc to build PUC-Rio Lua
       # versions on Windows (LuaJIT will be build using MinGW/gcc).
@@ -52,4 +58,5 @@ jobs:
         (Get-Command nlua).Path
         echo "Checking nvim in advance"
         (Get-Command nvim).Path
+        nvim
         luarocks test nvim-best-practices-plugin-template-scm-1.rockspec --prepare
