@@ -37,11 +37,13 @@ jobs:
       if: ${{ matrix.toolchain == 'msvc' }}
       uses: ilammy/msvc-dev-cmd@v1
 
-    - uses: luarocks/gh-actions-lua@master
+    - name: Install Lua
+      uses: luarocks/gh-actions-lua@master
       with:
         luaVersion: "${{ matrix.luaVersion }}"
 
-    - uses: luarocks/gh-actions-luarocks@v5
+    - name: Install LuaRocks
+      uses: luarocks/gh-actions-luarocks@v5
 
     - name: Build Test Dependencies
       run: |
