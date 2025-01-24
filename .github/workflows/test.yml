@@ -8,7 +8,7 @@ on:
   push:
     branches:
       - main
-      - repro_fail
+      - repro_fail_fix
 
 jobs:
   test:
@@ -47,4 +47,5 @@ jobs:
 
     - name: Build Test Dependencies
       run: |
+        luarocks install nlua
         luarocks test nvim-best-practices-plugin-template-scm-1.rockspec --prepare
