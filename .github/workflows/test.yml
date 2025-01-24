@@ -8,7 +8,7 @@ on:
   push:
     branches:
       - main
-      - luarocks_prepare_test
+      - repro_fail
 
 jobs:
   test:
