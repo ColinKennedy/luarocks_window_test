@@ -54,8 +54,6 @@ jobs:
     - name: Build Test Dependencies
       run: |
         luarocks install nlua
-        echo "Checking nlua in advance"
-        (Get-Command nlua).Path
         echo "Checking nvim in advance"
         (Get-Command nvim).Path
         nvim
