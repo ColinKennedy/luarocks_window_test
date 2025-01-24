@@ -50,4 +50,6 @@ jobs:
         luarocks install nlua
         echo "Checking nlua in advance"
         (Get-Command nlua).Path
+        echo "Checking nvim in advance"
+        (Get-Command nvim).Path
         luarocks test nvim-best-practices-plugin-template-scm-1.rockspec --prepare
