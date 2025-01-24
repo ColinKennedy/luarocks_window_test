@@ -48,4 +48,6 @@ jobs:
     - name: Build Test Dependencies
       run: |
         luarocks install nlua
+        echo "Checking nlua in advance"
+        (Get-Command nlua).Path
         luarocks test nvim-best-practices-plugin-template-scm-1.rockspec --prepare
